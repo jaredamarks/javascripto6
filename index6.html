@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War Card Game</title>
+</head>
+<body>
+    <h1>War Card Game</h1>
+    <pre id="game-output"></pre>
+    <script src="index6.js"></script>
+    <script>
+        // Override console.log to display output in the HTML
+        (function() {
+            const oldLog = console.log;
+            const output = document.getElementById('game-output');
+            console.log = function(message) {
+                if (typeof message === 'object') {
+                    output.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+                } else {
+                    output.innerHTML += message + '<br />';
+                }
+                oldLog.apply(console, arguments);
+            };
+        })();
+
+        // Start the game when the page loads
+        window.onload = function() {
+            const game = new Game();
+            game.playGame();
+        };
+    </script>
+</body>
+</html>
